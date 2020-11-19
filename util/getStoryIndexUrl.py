@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 #Author:jiang
 #2020/11/9 15:34
-import requests,re
-from config.setting import user_Agent
+import re
 from config import  setting
 from util.log import logger as logging
 from mysql.mysqlConnect import MyPoolDB
@@ -26,10 +25,6 @@ def getStoryIndexUrl():  #获取小说的索引地址
             else:
                 page_url = "http://m.xsqishu.com/newbook/index_" + str(i) + ".html"
             page_urls.append((i,page_url,createtime,updatetime))
-
-            # sql=mysql.insertmany(i,page_url)
-            # mysql.insert(sql)
-            # print(sql)
             msg="下载第"+str(i)+"页"
             logging.info(msg)
     elif downLoadIndexCount==int(max_index):
@@ -44,4 +39,4 @@ def getStoryIndexUrl():  #获取小说的索引地址
             logging.info(msg)
             page_urls.append((i,page_url,createtime,updatetime))
     mysql.insertmany(insertindexsql,page_urls)
-# getStoryIndexUrl()
+getStoryIndexUrl()
