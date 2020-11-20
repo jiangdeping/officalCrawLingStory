@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Author:jiang
 # 2020/11/9 17:23
-import requests
+import requests,time
 from config.setting import user_Agent
 from util.log import logger as logging
 def requestOverwrite(url):
@@ -14,9 +14,13 @@ def requestOverwrite(url):
         try:
             user_agent = user_Agent()
             res = res.get(url, headers=user_agent)
-            flag = False
+            if res.status_code ==200:
+                flag = False
+            # else:
+            #     msg="GET页面<"+url+">失败，重新请求- - -"
+            #     time.sleep(2)
+            #     logging.info(msg)
         except Exception as e:
-            logging.info("- - 连接失败,正在重连- ")
+            logging.info("- - 连接失败,正在重连- - ")
             logging.error(e)
-            continue
     return res

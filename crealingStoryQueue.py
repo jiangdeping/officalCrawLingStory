@@ -5,8 +5,8 @@ import threading
 import time
 import queue
 import requests
-from mysql.SQL_LIST import insertStory
-from mysql.db_PooledDB import pool,Connect
+# from mysql.SQL_LIST import insertStory
+# from mysql.db_PooledDB import pool,Connect
 from  config.setting import user_Agent
 from util.log import logger as logging
 import re

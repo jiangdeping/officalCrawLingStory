@@ -10,9 +10,9 @@ updatetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 url = "http://m.xsqishu.com/newbook/"
 #配置为False  全量下载
-DOWNLOADNUM=3 # 每夜索引获取的故事数目
-STORYCONTENTNUM=50 #下载的故事个数 storynum=Fasle 全量下载
-INDEXNUM=2 #小说索引的下载地址
+DOWNLOADNUM=100 #下载的故事个数
+STORYCONTENTNUM=10 #每个故事的下载章节数 storynum=Fasle 全量下载
+INDEXNUM=50 #小说索引数
 stroypath = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "story\story.txt")
 urlpath = os.path.join(os.path.dirname(os.getcwd()), "story\\url.txt")
 dbpath = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "config\\db_config.ini")

@@ -3,7 +3,7 @@
 #2020/11/9 15:18
 from  datetime import datetime
 storyIndexSql="SELECT storyindexUrl FROM STORY_INDEX"
-storyUrlSql="SELECT storyurl FROM STORY_url"
+storyUrlSql="SELECT storytitle,storyurl FROM STORY_url"
 storyNoSql="select DISTINCT storyno from story_content_url"
 stroryNoSql="SELECT storyno,storyurl FROM story_url"
 storyIndexCountSql="SELECT count(*) FROM STORY_INDEX"

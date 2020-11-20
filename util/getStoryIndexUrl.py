@@ -17,7 +17,7 @@ def getStoryIndexUrl():  #获取小说的索引地址
     max_index = max_index_reg.findall(res.text)[0]
     page_urls=[]
     if downLoadIndexCount==0:
-        logging.info("---索引下载中，请等待---")
+        logging.info("- - - -索引下载中，请等待- - - -")
 
         for i in range(1, int(max_index)+1):
             if i == 1:
@@ -28,9 +28,9 @@ def getStoryIndexUrl():  #获取小说的索引地址
             msg="下载第"+str(i)+"页"
             logging.info(msg)
     elif downLoadIndexCount==int(max_index):
-        logging.info("----当前已是最新索引,无需更新----")
+        logging.info("- - - -当前已是最新索引,无需更新- - - -")
     else:
-        logging.info("----索引更新中,请等待----")
+        logging.info("- - - -索引更新中,请等待- - - -")
         for i in range(downLoadIndexCount+1, int(max_index)+1):
             page_url = "http://m.xsqishu.com/newbook/index_" + str(i) + ".html"
             # sql=inertStoryPageIndexSql(i,page_url)
@@ -39,4 +39,4 @@ def getStoryIndexUrl():  #获取小说的索引地址
             logging.info(msg)
             page_urls.append((i,page_url,createtime,updatetime))
     mysql.insertmany(insertindexsql,page_urls)
-getStoryIndexUrl()
+# getStoryIndexUrl()

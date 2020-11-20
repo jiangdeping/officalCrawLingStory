@@ -7,7 +7,7 @@ from util.log import logger as logging
 from mysql.mysqlConnect import MyPoolDB
 from util.resquestOverwrite import requestOverwrite
 from mysql.mysqllist import insertStoryContentUrlSql
-from util.mysqFunc import getStoryUrls
+from util.mysqFunc import queryStoryUrls
 mysql=MyPoolDB()
 def getStoryContentUrl(url):
     storyContentNum = STORYCONTENTNUM
@@ -25,16 +25,17 @@ def getStoryContentUrl(url):
     for i in storyUrls[0:storyContentNum]:
         url = "http://m.xsqishu.com" + i + ".html"
         urls.append(url)
-    alreadyDownLoadurls=getStoryUrls(storyno)
+    alreadyDownLoadurls=queryStoryUrls(storyno)
     downloadUrls=list(set(urls).difference(set(alreadyDownLoadurls)))
     if downloadUrls:
         for url in downloadUrls:
             reg=re.compile(r'%s/(\d+)'%(identical))
-            chapter_num=reg.findall(url)[0]
-            new_chapter_num=storyno+str(chapter_num.zfill(5))
-            msg="获取下载链接地址："+url
-            logging.info(msg)
-            insertStoyrContentUrls.append((storyno,new_chapter_num,url,createtime))
+            if reg.findall(url):
+                chapter_num=reg.findall(url)[0]
+                new_chapter_num=storyno+str(chapter_num.zfill(5))
+                msg="更新下载链接地址："+url
+                logging.info(msg)
+                insertStoyrContentUrls.append((storyno,new_chapter_num,url,createtime))
         mysql.insertmany(insertStoryContentUrlSql,insertStoyrContentUrls)
 # url = "http://m.xsqishu.com/book/78/83877.html"
 # getStoryContentUrl(url)
